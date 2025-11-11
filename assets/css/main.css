@@ -7638,7 +7638,7 @@ input, select, textarea {
 	#plusEvent.wrapper.style2,
 	#form.wrapper.style2 {
 		background-color: #ffffff;
-		background-image: url("/images/imageBackground.png");
+		background-image: url("../../images/imageBackground.png");
 		background-size: cover;
 		background-position: center center;
 		background-repeat: no-repeat;
@@ -9108,7 +9108,7 @@ input, select, textarea {
 
 /* Giantsfan-ship 이벤트 레이아웃 */
 	#items.wrapper {
-		background-image: url('/images/imageBackground.png');
+		background-image: url('../../images/imageBackground.png');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
