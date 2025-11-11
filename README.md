@@ -91,6 +91,8 @@
 - 기념 이벤트가 아닌 개막 이벤트 느낌을 받을 우려
 
 ---
+# 웹 페이지 기능
+
 
 ## 🎯 주요 기능
 
@@ -143,7 +145,6 @@ cd portfolio_lotte
    - 또는 Node.js: `npx http-server`
 
 3. 브라우저에서 열기
-   - `http://localhost:8000/index.html` (또는 사용 중인 포트)
 
 ## 🎨 웹사이트 주요 섹션
 
