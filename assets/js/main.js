@@ -99,6 +99,128 @@
 		$('.smooth-scroll').scrolly();
 		$('.smooth-scroll-middle').scrolly({ anchor: 'middle' });
 
+	// 이미지 preload 및 빠른 스크롤 대응
+		(function() {
+			// 모든 이미지 요소 수집
+			var $allImages = $('img[src]');
+			var loadedImages = new Set();
+			
+			// 이미지 preload 함수
+			function preloadImage(src) {
+				if (loadedImages.has(src)) return;
+				loadedImages.add(src);
+				
+				var img = new Image();
+				img.src = src;
+			}
+			
+			// Intersection Observer로 뷰포트에 들어오는 이미지 감지
+			if ('IntersectionObserver' in window) {
+				var imageObserver = new IntersectionObserver(function(entries) {
+					entries.forEach(function(entry) {
+						if (entry.isIntersecting) {
+							var $element = $(entry.target);
+							var $section = $element.closest('section, .gallery, .event-layout, .image.fit');
+							
+							// 이미지 preload
+							if ($element.is('img')) {
+								preloadImage($element.attr('src'));
+							} else {
+								$element.find('img[src]').each(function() {
+									preloadImage($(this).attr('src'));
+								});
+							}
+							
+							// 섹션이 뷰포트에 들어오면 is-inactive 제거
+							if ($section.length && $section.hasClass('is-inactive')) {
+								$section.removeClass('is-inactive');
+							}
+							
+							// 이미지가 로드되었는지 확인하고 강제 표시
+							setTimeout(function() {
+								$section.find('img').each(function() {
+									var $img = $(this);
+									if ($img[0].complete && $img[0].naturalWidth > 0) {
+										$img.closest('section, .gallery, .event-layout, .image.fit')
+											.removeClass('is-inactive');
+									}
+								});
+							}, 100);
+							
+							imageObserver.unobserve(entry.target);
+						}
+					});
+				}, {
+					rootMargin: '200px 0px', // 뷰포트 밖 200px 전에 미리 감지
+					threshold: 0.01
+				});
+				
+				// 모든 섹션과 이미지 관찰 시작
+				$wrapper.find('section, .gallery, .event-layout, .image.fit').each(function() {
+					imageObserver.observe(this);
+				});
+			}
+			
+			// 스크롤 이벤트로 추가 보완 (Intersection Observer가 없는 경우 대비)
+			var scrollTimeout;
+			$window.on('scroll', function() {
+				clearTimeout(scrollTimeout);
+				scrollTimeout = setTimeout(function() {
+					var windowTop = $window.scrollTop();
+					var windowBottom = windowTop + $window.height();
+					
+					$wrapper.find('section, .gallery, .event-layout, .image.fit').each(function() {
+						var $this = $(this);
+						var elementTop = $this.offset().top;
+						var elementBottom = elementTop + $this.outerHeight();
+						
+						// 뷰포트와 겹치는 경우
+						if (elementBottom >= windowTop && elementTop <= windowBottom) {
+							// 이미지 preload
+							$this.find('img[src]').each(function() {
+								preloadImage($(this).attr('src'));
+							});
+							
+							// is-inactive 제거
+							if ($this.hasClass('is-inactive')) {
+								$this.removeClass('is-inactive');
+							}
+						}
+					});
+				}, 50);
+			});
+			
+			// 이미지 로드 완료 후 강제 표시
+			$allImages.on('load', function() {
+				var $img = $(this);
+				var $section = $img.closest('section, .gallery, .event-layout, .image.fit');
+				
+				// 이미지가 로드되면 해당 섹션의 is-inactive 제거
+				if ($section.length && $section.hasClass('is-inactive')) {
+					$section.removeClass('is-inactive');
+				}
+			});
+			
+			// 이미 이미 로드된 이미지 처리
+			$allImages.each(function() {
+				var $img = $(this);
+				if ($img[0].complete && $img[0].naturalWidth > 0) {
+					var $section = $img.closest('section, .gallery, .event-layout, .image.fit');
+					if ($section.length && $section.hasClass('is-inactive')) {
+						// 뷰포트에 보이는지 확인
+						var windowTop = $window.scrollTop();
+						var windowBottom = windowTop + $window.height();
+						var elementTop = $section.offset().top;
+						var elementBottom = elementTop + $section.outerHeight();
+						
+						if (elementBottom >= windowTop && elementTop <= windowBottom) {
+							$section.removeClass('is-inactive');
+						}
+					}
+				}
+			});
+		})();
+
 	// Wrapper.
 		$wrapper.children()
 			.scrollex({
