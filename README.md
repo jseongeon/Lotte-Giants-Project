@@ -203,8 +203,9 @@ cd portfolio_lotte
 **정성언 (Jeong SeongEon)**
 - 이메일: tjddjs1507@gmail.com
 - 전화: 010-8300-1507
-- GitHub: [@jseongeon](https://github.com/jseongeon)
-- Notion: [포트폴리오](https://lily-honeydew-416.notion.site/2a14c52da783805bab73c163e466070d)
+- GitHub: <a href="https://github.com/jseongeon" target="_blank" rel="noopener noreferrer">@jseongeon</a>
+- Notion: <a href="https://lily-honeydew-416.notion.site/2a14c52da783805bab73c163e466070d" target="_blank" rel="noopener noreferrer">포트폴리오</a>
+- Google Drive : <a href="https://drive.google.com/drive/folders/1tQLiQ_V6M20OWXHj1nJvzc6A9bzyEL84?usp=drive_link" target="_blank" rel="noopener noreferrer">포트폴리오</a>
 
 ## 🙏 크레딧
 
