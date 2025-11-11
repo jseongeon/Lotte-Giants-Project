@@ -207,12 +207,4 @@ cd portfolio_lotte
 - Notion: <a href="https://lily-honeydew-416.notion.site/2a14c52da783805bab73c163e466070d" target="_blank" rel="noopener noreferrer">포트폴리오</a>
 - Google Drive : <a href="https://drive.google.com/drive/folders/1tQLiQ_V6M20OWXHj1nJvzc6A9bzyEL84?usp=drive_link" target="_blank" rel="noopener noreferrer">포트폴리오</a>
 
-## 🙏 크레딧
-
-- **템플릿**: Story by HTML5 UP (html5up.net)
-- **아이콘**: Font Awesome (fontawesome.io)
-- **라이브러리**: 
-  - jQuery (jquery.com)
-  - Scrollex (github.com/ajlkn/jquery.scrollex)
-  - Responsive Tools (github.com/ajlkn/responsive-tools)
 
